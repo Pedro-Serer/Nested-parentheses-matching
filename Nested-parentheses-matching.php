@@ -3,7 +3,7 @@
     {
         $correto = TRUE;
 
-        $pilha = new splpilha();
+        $pilha = new splStack();
 
         for ($i=0; $i < strlen($expressaoAlgebrica); $i++) {
             $comeco = substr($expressaoAlgebrica, $i, 1);
