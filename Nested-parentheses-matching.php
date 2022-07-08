@@ -1,44 +1,44 @@
 <?php
-    function expressionChecker(string $expression): bool 
+    function verificadorDeExpressoes(string $expressaoAlgebrica): bool 
     {
-        $valid = TRUE;
+        $correto = TRUE;
 
-        $stack = new splStack();
+        $pilha = new splpilha();
 
-        for ($i=0; $i < strlen($expression); $i++) {
-            $char = substr($expression, $i, 1);
+        for ($i=0; $i < strlen($expressaoAlgebrica); $i++) {
+            $comeco = substr($expressaoAlgebrica, $i, 1);
 
-            switch ($char) {
+            switch ($comeco) {
                 case '(':
                 case '{':
                 case '[':
-                    $stack->push($char);
+                    $pilha->push($comeco);
                     break;
                 case ')':
                 case '}':
                 case ']':
-                    if ($stack->isEmpty()) {
-                        $valid = FALSE;
+                    if ($pilha->isEmpty()) {
+                        $correto = FALSE;
                     } else{
-                        $last = $stack->pop();
-                        if (($char == ")" && $last != "(") 
-                            || ($char == "}" && $last != "{") 
-                            || ($char == "}" && $last != "]")) {
+                        $fim = $pilha->pop();
+                        if (($comeco == ")" && $fim != "(") 
+                            || ($comeco == "}" && $fim != "{") 
+                            || ($comeco == "}" && $fim != "]")) {
 
-                            $valid = FALSE;
+                            $correto = FALSE;
                         }
                     }
                     break;
             }
 
-            if (!$valid){
+            if (!$correto){
                 break;
             }
 
-            if (!$stack->isEmpty()) {
-                $valid = FALSE;
+            if (!$pilha->isEmpty()) {
+                $correto = FALSE;
             }
         }
 
-        return $valid;
+        return $correto;
     }
